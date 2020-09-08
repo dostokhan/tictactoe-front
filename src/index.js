@@ -4,9 +4,15 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+import { loadState, configureStore } from './store/configureStore';
+// import './app.global.css';
+
+const persistedState = loadState();
+const store = configureStore(persistedState);
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App store={store} />
   </React.StrictMode>,
   document.getElementById('root')
 );
