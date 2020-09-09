@@ -1,14 +1,8 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import {
-  // Flex,
-  Box
-  // Card,
-  // Image,
-  // Heading,
-  // Text
-} from 'rebass';
+import { Box } from 'rebass';
+import { setSession } from 'actions/app';
 
 import Players from './Players';
 import Board from './Board';
@@ -17,7 +11,15 @@ import Winner from './Winner';
 
 export default function TicTacToe() {
   const winner = useSelector(state => state.app.winner);
+  const session = useSelector(state => state.app.session);
+  const dispatch = useDispatch();
   const showWinner = winner !== null;
+
+  useEffect(() => {
+    if (session === null) {
+      dispatch(setSession());
+    }
+  }, [dispatch, session]);
 
   return (
     <Box sx={{ width: '100%', maxWidth: 800 }}>

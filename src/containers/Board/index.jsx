@@ -1,15 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { Flex, Box } from 'rebass';
 import { setWinner } from 'actions/app';
-import {
-  Flex,
-  Box
-  // Card,
-  // Image,
-  // Score,
-  // Text
-} from 'rebass';
 
 import Cell from './Cell';
 

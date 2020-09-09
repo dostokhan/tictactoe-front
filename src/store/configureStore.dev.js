@@ -7,6 +7,8 @@ import createRootReducer from '../reducers';
 const rootReducer = createRootReducer();
 
 const configureStore = initialState => {
+  console.log('inital state');
+  console.log(initialState);
   // Redux Configuration
   const middleware = [];
   const enhancers = [];

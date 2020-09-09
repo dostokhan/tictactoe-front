@@ -9,9 +9,7 @@ class StorageClass {
       if (serialized === null) {
         return undefined;
       }
-      return this.justString.includes(key)
-        ? serialized
-        : JSON.parse(serialized);
+      return JSON.parse(serialized);
     } catch (err) {
       console.warn(err);
       return undefined;
@@ -20,9 +18,7 @@ class StorageClass {
 
   setItem(key, value) {
     try {
-      const serialized = this.justString.includes(key)
-        ? value
-        : JSON.stringify(value);
+      const serialized = JSON.stringify(value);
       this.store.setItem(key, serialized);
     } catch (err) {
       console.warn(err);
@@ -30,9 +26,7 @@ class StorageClass {
   }
 
   removeItem(key) {
-    if (process.env.NODE_ENV !== 'development') {
-      this.store.removeItem(key);
-    }
+    this.store.removeItem(key);
   }
 }
 

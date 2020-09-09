@@ -1,18 +1,21 @@
 import {
   SET_WINNER,
   TOGGLE_PLAYER_TURN,
-  GET_USER_ACTIONS,
   SAVE_USER_ACTION,
-  RESET_MATCH
-} from '../actions/app';
+  RESET_MATCH,
+  FETCH_LOGS_SUCCESS,
+  SET_SESSION
+} from 'actions/app';
 
 // export const getRootEntityType = state => state.app.rootEntityType;
 
 const INITIAL_STATE = {
+  session: null,
   loading: false,
   turn: 'one',
   board: ['_', '_', '_', '_', '_', '_', '_', '_', '_'],
-  winner: null
+  winner: null,
+  log: []
 };
 
 export default function appReducer(
@@ -20,9 +23,17 @@ export default function appReducer(
   { type, payload }
 ) {
   switch (type) {
+    case SET_SESSION:
+      return {
+        ...state,
+        session: payload
+      };
     case RESET_MATCH:
       return {
-        ...INITIAL_STATE
+        ...state,
+        turn: INITIAL_STATE.turn,
+        board: [...INITIAL_STATE.board],
+        winner: null
       };
     case SET_WINNER:
       return {
@@ -35,9 +46,10 @@ export default function appReducer(
         turn: state.turn === 'one' ? 'two' : 'one'
       };
 
-    case GET_USER_ACTIONS:
+    case FETCH_LOGS_SUCCESS:
       return {
-        ...state
+        ...state,
+        log: [...payload]
       };
     case SAVE_USER_ACTION:
       return {
